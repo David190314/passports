@@ -1,0 +1,9 @@
+//Middelware para el manejo de errores
+app.use((error, request, response, next)=>{
+    response.status(404).send(error.message)
+});
+//Middelware utilizando next para continuar con la ejecucion 
+app.use((response,request, next)=>{
+    console.log("hola mundo")
+    next();
+})
