@@ -2,10 +2,13 @@ const { notStrictEqual } = require('assert');
 const { request, response } = require('express');
 const express = require('express');
 const path = require("path");
-const app = express ()
-const PORT = 8000
 const taskArray = require('../oneServerjs/tasks.js')
+const {users} = require("./models");
+const app = express ()
+const PORT = 9000
 
+app.use(express.urlencoded()); // permite recibir los datos enviados desde el cliente
+app.use(express.json());// procesar datos atravez de formato json
 
 //Configuracion de Ejs
 app.set('views', path.join(__dirname, 'views'));
@@ -28,8 +31,15 @@ app.get("/registro",(request, response)=>{
     response.render("pages/register");
 })
 
-app.post("/registro",(request, response)=>{
-  console.log(request.body)
+app.post("/registro", async (request, response)=>{
+  let {firstname, lastname, email, password} = request.body;
+  let response = await users.create({
+     firstnam,
+     lastname,
+     email,
+     password
+   })
+  response.redirect("/registro")
 })
 
 
