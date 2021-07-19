@@ -12,7 +12,7 @@ app.set('views', path.join(__dirname, 'views'));
 //Definir el motor de plantilas
 app.set('view engine', 'ejs')
 
-let visitas = 1
+let visitas = 0
 app.get("/", (request, response)=>{
         console.log(visitas ++)
   response.render("pages/home", {title:"inicio", message : "Hola mundo con EJS", asistencia: visitas})
