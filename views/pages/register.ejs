@@ -1,12 +1,40 @@
-<form action="/registro" method="POST">
-    <label for="firstname">Nombre</label>
-    <input type="text" name="firstname" required>
-    <label for="lastname">Apellido</label>
-    <input type="text" name="lastname" required>
-    <label for="Correo">email</label>
-    <input type="email" name="email" required>
-    <label for="Contraseña">password</label>
-    <input type="password" name="password" required>
-    <button type="submit"> Send</button>
-  
-</form>
+<%- include('../template/head')-%>
+    <%- include('../template/navBar')-%>
+    <h2 class=" col-md-12 mt-5 pb-5 text-black text-center bg-register" id="title">Registro de Usuarios</h2>
+    <button type="button" class="btn btn-primary mb-5 ms-5" onclick="handle()">Nuevo Usuario</button>
+    <form class="row g-3 ms-5 needs-validation container d-none borderForm" id="FormUser" action="/registro" method="POST" >
+        <div class="col-md-5 mt-5 ms-5">
+            <label for="firstname" class="form-label">Nombre</label>
+            <input type="text" name="firstname"  class="form-control border border-dark" required >
+        </div>
+        <div class="col-md-5 mt-5 ms-5">
+            <label for="lastname" class="form-label">Apellido</label>
+            <input type="text" name="lastname" class="form-control border border-dark" required>
+        </div>
+        <div class="col-md-5 mt-5 ms-5">
+            <label for="Correo" class="form-label">email</label>
+            <input type="email" name="email" class="form-control border border-dark" placeholder="@expleme.com" required >
+        </div>
+        <div class="col-md-5 mt-5 ms-5">
+            <label for="Contraseña" class="form-label ">password</label>
+            <input type="password" name="password" class="form-control border border-dark" required>    
+        </div>
+        <div class="col-12 ms-5 pb-5 mt-5 d-flex justify-content-around">
+            <button type="submit" class="btn btn-success border border-dark" onclick="handleForm()"> Send</button>
+            <button type="reset" class="btn btn-warning border border-dark"> Reset</button>
+        </div>
+    </form>
+    <script>
+        function handle(){
+            let handlerForm = document.getElementById("FormUser")
+            handlerForm.classList.remove("d-none")    
+        }
+
+        function handleForm(){
+            let handleFormUser = document.getElementById("FormUser")
+            handleFormUser.classList.add("d-none")
+        }
+       
+    </script>
+<%- include('../template/footer')-%>
+
