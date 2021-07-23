@@ -1,0 +1,25 @@
+<%- include('../template/head')-%>
+<%- include('../template/navBar') -%>
+<h2 class=" col-md-12 mt-5 pb-5 text-black text-center ">Iniciar Sesíon</h2>
+<div class="container">
+  <form action="/login" method="POST" >
+    <div class="mb-3 col-md-12 d-flex justify-content-center">
+      <div class="col-md-4 ">
+        <label for="firstname" class="form-label col-md-12 text-center">Email address</label>
+        <input type="email" class="form-control " id="email" name="email">
+        <div class="form-text text-center">We'll never share your email.</div>
+      </div>
+    </div>
+    <div class="mb-3 col-md-12 d-flex justify-content-center ">
+      <div class="col-md-4">
+        <label for="lastname" class="form-label col-md-12 text-center">Password</label>
+        <input type="password" class="form-control" name="password">
+      </div>
+    </div>
+    <div class="col-md-12 d-flex justify-content-center  mb-5 mt-4">
+        <button type="submit" class="btn btn-primary border-dark">Submit</button>
+        <button type="reset" class="btn btn-secondary  border-dark ms-4">Reset</button>
+    </div>
+  </form>
+</div>
+<%- include('../template/footer')-%>

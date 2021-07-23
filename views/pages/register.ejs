@@ -1,8 +1,8 @@
 <%- include('../template/head')-%>
     <%- include('../template/navBar')-%>
-    <h2 class=" col-md-12 mt-5 pb-5 text-black text-center bg-register" id="title">Registro de Usuarios</h2>
+    <h2 class=" col-md-12 mt-5 pb-5 text-black text-center bg-register">Registro de Usuarios</h2>
     <button type="button" class="btn btn-primary mb-5 ms-5" onclick="handle()">Nuevo Usuario</button>
-    <form class="row g-3 ms-5 needs-validation container d-none borderForm" id="FormUser" action="/registro" method="POST" >
+    <form class="row g-3 ms-5 needs-validation container d-none " id="FormUser" action="/registro" method="POST" >
         <div class="col-md-5 mt-5 ms-5">
             <label for="firstname" class="form-label">Nombre</label>
             <input type="text" name="firstname"  class="form-control border border-dark" required >
@@ -21,7 +21,7 @@
         </div>
         <div class="col-12 ms-5 pb-5 mt-5 d-flex justify-content-around">
             <button type="submit" class="btn btn-success border border-dark" onclick="handleForm()"> Send</button>
-            <button type="reset" class="btn btn-warning border border-dark"> Reset</button>
+            <button type="reset" class="btn btn-secondary border border-dark"> Reset</button>
         </div>
     </form>
     <script>
