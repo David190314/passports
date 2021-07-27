@@ -7,18 +7,16 @@ passport.use(new LocalStrategy({
 }, async(email, password, done) => {
     try{
         let results = await users.findOne({where: {email}});
-        console.log(results)
         if(results && results.password === password){
             return done(null, results); 
         }
-        return done(null, false); 
+        return done(null, false,); 
     }catch(error){
         done(error);
     }
 }));
 
 passport.serializeUser((user, done) => {
-    
     return done(null, user.id);
 })
 

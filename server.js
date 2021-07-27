@@ -4,23 +4,24 @@ const taskArray = require('../oneServerjs/tasks.js')
 const {users} = require("./models");
 const passport = require("passport")
 const session = require("express-session");
-const cookieParser  = require("cookie-parser")
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const app = express ()
+let {sequelize} = require("./models");
+const app = express ()  
 require("./config/passport")
 const PORT = 8000
-let {sequelize} = require("./models");
-const tasks = require('../oneServerjs/tasks.js');
-const { request, response } = require('express');
-
-app.use(cookieParser("app secret"));
 
 app.use(session({
-  secret: "app secret", 
-  resave: true,
-  saveUninitialized: true
-}))
+  secret: "academlo secret",
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    expiration: 1 * 60 * 60 * 1000,
+    db: sequelize
+  })
+}));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static(__dirname + '/Css'))
 app.use(express.urlencoded({extended: true})); // permite recibir los datos enviados desde el cliente
@@ -31,8 +32,7 @@ app.set('views', path.join(__dirname, 'views'));
 //Definir el motor de plantilas
 app.set('view engine', 'ejs')
 
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 let visitas = 0
 app.get("/", (request, response)=>{
@@ -79,7 +79,7 @@ app.post("/login",passport.authenticate("local",{
   if(error) return next(error)
 })
 
-app.get("/categoria", (req, res, next) => {
+app.get("/categoria", (req, res) => {
     if(req.isAuthenticated()){
       let fullname = `${req.user.firstname} ${req.user.lastname}`;
       res.render("pages/categories", {title:"Categories", username :fullname});
