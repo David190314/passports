@@ -5,8 +5,8 @@
   <form action="/login" method="POST" >
     <div class="mb-3 col-md-12 d-flex justify-content-center">
       <div class="col-md-4 ">
-        <label for="firstname" class="form-label col-md-12 text-center">Email address</label>
-        <input type="email" class="form-control " id="email" name="email">
+          <label for="firstname" class="form-label col-md-12 text-center">Email address</label>
+          <input type="email" class="form-control " id="email" name="email">
         <div class="form-text text-center">We'll never share your email.</div>
       </div>
     </div>
@@ -21,5 +21,13 @@
         <button type="reset" class="btn btn-secondary  border-dark ms-4">Reset</button>
     </div>
   </form>
+  <div class="col-3">
+    <a class="btn btn-ligth custom-gbtn" href="/auth/google">
+        <i class="bi bi-google"></i> Continuar con Google
+    </a>
+    <a class="btn btn-ligth custom-gbtn" href="/auth/bi-facebook">
+      <i class="bi bi-facebook"></i> Continuar Facebook
+    </a>
+  </div>
 </div>
 <%- include('../template/footer')-%>

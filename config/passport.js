@@ -1,7 +1,12 @@
+require("dotenv").config();
 const passport = require('passport');
 const {users} = require('../models')
 const LocalStrategy = require('passport-local').Strategy;
+GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 
+
+
+//Estrategia local
 passport.use(new LocalStrategy({
     usernameField: 'email'
 }, async(email, password, done) => {
@@ -16,15 +21,35 @@ passport.use(new LocalStrategy({
     }
 }));
 
-passport.serializeUser((user, done) => {
-    return done(null, user.id);
+
+//estrategia google 
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.CLIENT_ID_GOOGLE,
+    clientSecret: process.env.SECRET_ID,
+    callbackURL: "http://localhost:8000/auth/google/callback",
+    passReqtoCallback: true
+},(request, accessToken, refreshToken, profile, done)=>{
+    return done(null,profile);
+}));
+
+passport.serializeUser((profile, done) => {
+    return done(null, profile);
 })
 
-passport.deserializeUser(async(id, done) => {
+passport.deserializeUser(async(profile, done) => {
     try{
-        let user = await users.findByPk(id, {raw: true});
-        done(null, user); //request.user
+        if(profile.id.toString().length <=10){
+            let user = await users.findByPk(profile.id, {plain: true});
+            done(null, user); //request.user
+        }else{
+            profile.firstname = profile.name.givenName
+            profile.lastname = profile.name.familyName
+            done(null, profile);
+        }
     }catch(error){
         done(error)
     }
 });
+
+

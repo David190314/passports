@@ -20,6 +20,8 @@ app.use(session({
   })
 }));
 
+const passportGoogleStrategy = passport.authenticate("google", {session: true, scope: [ 'email', 'profile' ]});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -71,6 +73,14 @@ app.post("/registro", async (request, response, next)=>{
 app.get("/login",(require, response, next)=>{
   response.render("pages/login", {title : 'Iniciar Sesíon'});
 })
+
+app.get('/auth/google', passportGoogleStrategy);
+
+app.get( '/auth/google/callback',
+    passport.authenticate( 'google', {
+        successRedirect: '/categoria',
+        failureRedirect: '/login'
+}));
 
 app.post("/login",passport.authenticate("local",{
   successRedirect: '/categoria',
