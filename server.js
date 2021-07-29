@@ -6,6 +6,7 @@ const passport = require("passport")
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 let {sequelize} = require("./models");
+const { get } = require('http');
 const app = express ()  
 require("./config/passport")
 const PORT = 8000
@@ -21,6 +22,7 @@ app.use(session({
 }));
 
 const passportGoogleStrategy = passport.authenticate("google", {session: true, scope: [ 'email', 'profile' ]});
+const passportFacebookStrategy = passport.authenticate("facebook",{session: true, scope: ['email', 'public_profile']})
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -76,11 +78,20 @@ app.get("/login",(require, response, next)=>{
 
 app.get('/auth/google', passportGoogleStrategy);
 
+app.get('/auth/facebook', passportFacebookStrategy);
+
 app.get( '/auth/google/callback',
     passport.authenticate( 'google', {
         successRedirect: '/categoria',
         failureRedirect: '/login'
 }));
+
+app.get('/auth/facebook/callback', 
+    passport.authenticate('facebook',{
+      successRedirect: '/categoria',
+      failureRedirect: '/login'
+}));
+
 
 app.post("/login",passport.authenticate("local",{
   successRedirect: '/categoria',
