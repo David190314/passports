@@ -8,19 +8,6 @@ const sessionConf = require('./utils/session.conf')
 const app = express ()  
 require("./config/passport")
 
-// const SequelizeStore = require("connect-session-sequelize")(session.Store);
-// let {sequelize} = require("./models");
-
-
-// app.use(session({
-//   secret: "academlo secret",
-//   resave: false,
-//   saveUninitialized: false,
-//   store: new SequelizeStore({
-//     expiration: 1 * 60 * 60 * 1000,
-//     db: sequelize
-//   })
-// }));
 app.use(sessionConf);
 app.use(passport.initialize());
 app.use(passport.session());

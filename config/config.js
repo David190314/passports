@@ -5,14 +5,18 @@ module.exports = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     host: process.env.DB_HOST,
-    dialect: "postgres"
+    dialect: "postgres",
   },
   test: {
-    username: "root",
-    password: null,
-    database: "database_test",
-    host: "127.0.0.1",
-    dialect: "mysql"
+    sername: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    host: process.env.DB_HOST,
+    dialect: "postgres",
+    define:{
+      createdAt: 'created_at',
+      updateAt: 'update_at'
+    }
   },
   production: {
     username: "root",
