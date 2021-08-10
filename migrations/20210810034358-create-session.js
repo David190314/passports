@@ -8,10 +8,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       userId: {
-        type: Sequelize.STRING,
-        reference:{
+        type: Sequelize.INTEGER,
+        references:{
           model: "users",
-          key : "id"        
+          key: "id"        
         }
       },
       expires: {
